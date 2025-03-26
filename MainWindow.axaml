@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="YourNamespace.MainWindow"
+        Title="TCP Client"
+        Width="400" Height="250">
+	<Grid RowDefinitions="Auto,Auto,Auto,*">
+		<TextBox x:Name="IpTextBox" Watermark="Введите IP сервера" Margin="10"/>
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+			<Button x:Name="ConnectButton" Content="Подключиться" Margin="5"/>
+			<Button x:Name="SendButton" Content="Отправить" Margin="5" IsEnabled="False"/>
+		</StackPanel>
+		<TextBox x:Name="MessageTextBox" Watermark="Введите сообщение" Margin="10" Grid.Row="2"/>
+		<ScrollViewer Grid.Row="3" Margin="10" VerticalScrollBarVisibility="Auto">
+			<TextBox x:Name="MessagesBox" IsReadOnly="True" AcceptsReturn="True"/>
+		</ScrollViewer>
+	</Grid>
+</Window>
