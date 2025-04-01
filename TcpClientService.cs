@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -40,6 +40,7 @@ namespace YourNamespace
                 await _client.ConnectAsync(IPAddress.Parse(serverIp), port);
                 _stream = _client.GetStream();
                 _logAction($"Подключено к серверу {serverIp}:{port}");
+                _ = ReceiveMessagesAsync(); // Запуск асинхронного получения сообщений
                 return true;
             }
             catch
@@ -57,6 +58,22 @@ namespace YourNamespace
             byte[] buffer = Encoding.Unicode.GetBytes(formattedMessage);
             await _stream.WriteAsync(buffer, 0, buffer.Length);
             _logAction($"Отправлено: {formattedMessage}");
+        }
+
+        private async Task ReceiveMessagesAsync()
+        {
+            byte[] buffer = new byte[1024];
+
+            while (_client.Connected)
+            {
+                int bytesRead = await _stream.ReadAsync(buffer, 0, buffer.Length);
+                if (bytesRead == 0) break;
+
+                string message = Encoding.Unicode.GetString(buffer, 0, bytesRead);
+                Dispatcher.UIThread.Post(() => _logAction($"Получено: {message}"));
+            }
+
+            Close();
         }
 
         public void Close()
