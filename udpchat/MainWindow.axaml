@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="https://github.com/avaloniaui"
+        xmlns:vm="clr-namespace:UdpChatAvalonia"
+        x:Class="UdpChatAvalonia.MainWindow"
+        Title="UDP Chat" Width="600" Height="500">
+
+	<Design.DataContext>
+		<vm:MainWindow />
+	</Design.DataContext>
+
+	<DockPanel Margin="10">
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 10">
+			<TextBox x:Name="UserNameTextBox" Width="150" Watermark="Имя" />
+			<Button x:Name="LoginButton" Content="Войти" Margin="5 0"/>
+			<Button x:Name="LogoutButton" Content="Выйти" Margin="5 0"/>
+		</StackPanel>
+
+		<ScrollViewer Height="300" VerticalScrollBarVisibility="Auto">
+			<TextBox x:Name="ChatTextBox" IsReadOnly="True" AcceptsReturn="True" />
+		</ScrollViewer>
+
+		<StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+			<TextBox x:Name="MessageTextBox" Width="400" Watermark="Введите сообщение" />
+			<Button x:Name="SendButton" Content="Отправить" Margin="5 0"/>
+		</StackPanel>
+	</DockPanel>
+</Window>
